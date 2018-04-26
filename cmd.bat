@@ -1,6 +1,6 @@
 rem Windows command prompt
 rem cmd提权
-doskey su=runas /user:User cmd
+doskey su=runas /user:administrator cmd
 
 rem U盘分区
 diskpart
