@@ -1,0 +1,89 @@
+https://www.microsoft.com/zh-cn/software-download/windows10ISO/
+https://www.microsoft.com/en-us/software-download/windows10ISO/
+https://www.microsoft.com/en-us/software-download/windows8ISO/
+chrome console
+var _0x5c09=["product-edition","getElementById","innerHTML","<option value='' selected='selected'>Select edition</option><option value='2'>Windows 7 Home Basic SP1 </option><option value='4'>Windows 7 Professional SP1 </option><option value='6'>Windows 7 Home Premium SP1 </option><option value='8'>Windows 7 Ultimate SP1 </option><option value='10'>Windows 7 Home Premium N SP1 </option><option value='12'>Windows 7 Professional N SP1 </option><option value='14'>Windows 7 Ultimate N SP1 </option><option value='16'>Windows 7 Professional K SP1 </option><option value='18'>Windows 7 Professional KN SP1 </option><option value='20'>Windows 7 Home Premium K SP1 </option><option value='22'>Windows 7 Home Premium KN SP1 </option><option value='24'>Windows 7 Ultimate KN SP1 </option><option value='26'>Windows 7 Ultimate K SP1 </option><option value='28'>Windows 7 Starter SP1 </option><option value='48'>Windows 8.1 Single Language </option><option value='52'>Windows 8.1 </option><option value='55'>Windows 8.1 N </option><option value='61'>Windows 8.1 K </option><option value='62'>Windows 8.1 KN </option><option value='68'>Windows 8.1 Professional LE </option><option value='69'>Windows 8.1 Professional LE K </option><option value='70'>Windows 8.1 Professional LE KN </option><option value='71'>Windows 8.1 Professional LE N </option><option value='75'>Windows 10 Education (Academic) th1</option><option value='76'>Windows 10 Education KN (Academic) th1</option><option value='77'>Windows 10 Education N (Academic) th1</option><option value='78'>Windows 10 China Get Genuine Chinese Simplified th1</option><option value='79'>Windows 10 th1</option><option value='80'>Windows 10 KN th1</option><option value='81'>Windows 10 N th1</option><option value='82'>Windows 10 Single Language th1</option><option value='83'>Windows 7 Home Basic SP1 COEM </option><option value='85'>Windows 7 Home Basic SP1 COEM GGK </option><option value='86'>Windows 7 Home Premium N SP1 COEM </option><option value='87'>Windows 7 Home Premium SP1 COEM </option><option value='88'>Windows 7 Home Premium SP1 COEM GGK </option><option value='89'>Windows 7 Home Premium K SP1 COEM </option><option value='90'>Windows 7 Professional N SP1 COEM </option><option value='91'>Windows 7 Professional SP1 COEM </option><option value='92'>Windows 7 Starter SP1 COEM </option><option value='93'>Windows 7 Ultimate K SP1 COEM </option><option value='94'>Windows 7 Ultimate KN SP1 COEM </option><option value='95'>Windows 7 Ultimate N SP1 COEM </option><option value='96'>Windows 7 Ultimate SP1 COEM </option><option value='97'>Windows 7 Home Premium KN SP1 COEM </option><option value='98'>Windows 7 Professional KN SP1 COEM </option><option value='99'>Windows 10 (1511 th2) </option><option value='100'>Windows 10 Education (1511 th2) </option><option value='101'>Windows 10 Education KN (1511 th2) </option><option value='102'>Windows 10 Education N (1511 th2) </option><option value='103'>Windows 10 China Get Genuine Chinese Simplified (1511 th2)</option><option value='104'>Windows 10 KN (1511 th2) </option><option value='105'>Windows 10 N (1511 th2) </option><option value='106'>Windows 10 Single Language (1511 th2) </option>","backgroundColor","style","blue","color","yellow","fontFamily","consolas","submit-product-edition","Confirm (WZT)","go to http://wzor.net/ or https://twitter.com/WZorNET or https://twitter.com/nummerok :D","log"],_0x1d62=[_0x5c09[0],_0x5c09[1],_0x5c09[2],_0x5c09[3],_0x5c09[4],_0x5c09[5],_0x5c09[6],_0x5c09[7],_0x5c09[8],_0x5c09[9],_0x5c09[10],_0x5c09[11],_0x5c09[12]],edititonbox=document[_0x1d62[1]](_0x1d62[0]);edititonbox[_0x1d62[2]]=_0x1d62[3],edititonbox[_0x1d62[5]][_0x1d62[4]]=_0x1d62[6],edititonbox[_0x1d62[5]][_0x1d62[7]]=_0x1d62[8],edititonbox[_0x1d62[5]][_0x1d62[9]]=_0x1d62[10],document[_0x1d62[1]](_0x1d62[11])[_0x1d62[2]]=_0x1d62[12],console[_0x5c09[14]](_0x5c09[13]);
+
+Win7_Ult_SP1_Chinese(Simplified)_x64.iso
+MD5:	480b62c3acd6c8a36b18d9e906cd90d2
+SHA1:	2ce0b2db34d76ed3f697ce148cb7594432405e23
+SHA256:	70cdfb0cdcbeb2659163e9417d5c242b37ae564da810e7da21dac5c8492ab72f
+SHA512:	2913e762a597ed2173bef48c9e6854fad4cf9cc1cdaca53112c4ef8b3129f7475551dc55eda3d2cc797b83da1f4f864550112a3cf20a36436de4d605fec5dcf7
+reset activate
+slmgr -rearm
+slmgr -ato
+
+Office
+File Name: cn_office_professional_plus_2016_x86_x64_dvd_6969182.iso
+Languages: Chinese - Simplified
+SHA1: 277926A41B472EE38CA0B36ED8F2696356DCC98F
+activate Office
+KBKQT-2NMXY-JJWGP-M62JB-92CD4
+YC7DK-G2NP3-2QQC3-J6H88-GVGXT
+XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99
+V7QKV-4XVVR-XYV4D-F7DFM-8R6BM
+VYBBJ-TRJPB-QFQRF-QFT4D-H3GVB
+cd C:\Program Files (x86)\Microsoft Office\Office16
+cscript OSPP.VBS /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99
+cscript OSPP.VBS /sethst:nextlevel.uk.to
+cscript OSPP.VBS /act
+cscript OSPP.VBS /dstatus
+
+activate Office use kms-server
+32bit
+cd C:\Program Files (x86)\Microsoft Office\Office16
+64bit
+cd C:\Program Files\Microsoft Office\Office16
+for /f %x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
+for /f %x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
+cscript OSPP.VBS /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99
+cscript ospp.vbs /sethst:192.168.1.5
+cscript ospp.vbs /act
+
+Windows10 key
+Windows 10 Professional       W269N-WFGWX-YVC9B-4J6C9-T83GX
+Windows 10 Enterprise         NPPR9-FWDCX-D2C8J-H872K-2YT43
+activate Win10
+slmgr /upk
+slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX 
+slmgr /skms 192.168.1.5:1688
+slmgr /ato
+slmgr /xpr
+
+Windows 8.1 Professional
+GCRJD-8NW9H-F2CDX-CCM8D-9D6T9
+
+Windows 10 Professional : W269N-WFGWX-YVC9B-4J6C9-T83GX,VK7JG-NPHTM-C97JM-9MPGT-3V66T,8N67H-M3CY9-QT7C4-2TR7M-TXYCV
+
+windows XP Professional product key
+H689T-BFM2F-R6GF8-9WPYM-B6378
+MR49R-DRJXX-M6PX2-V96BF-8CKBJ
+DG8FV-B9TKY-FRT9J-6CRCC-XPQ4G
+MRX3F-47B9T-2487J-KWKMF-RPWBY
+THMPV-77D6F-94376-8HGKG-VRDRQ
+CB9YB-Q73J8-RKPMH-M2WFT-P4WQJ
+
+office.bat
+@echo off
+title Activate Microsoft Office 2016 ALL versions for FREE!&cls&echo =====================================&echo #Copyright: MSGuides.com&echo =====================================&echo.&echo #Supported products:&echo - Microsoft Office Standard 2016&echo - Microsoft Office Professional Plus 2016&echo.&echo.
+if exist "%ProgramFiles%\Microsoft Office\Office16\ospp.vbs" cd /d "%ProgramFiles%\Microsoft Office\Office16"
+if exist "%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs" cd /d "%ProgramFiles(x86)%\Microsoft Office\Office16"
+for /f %%x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%%x" >nul
+for /f %%x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%%x" >nul
+echo.&echo ====================================&echo Activating your Office...
+cscript //nologo ospp.vbs /rearm >nul&cscript //nologo ospp.vbs /unpkey:WFG99 >nul&cscript //nologo ospp.vbs /unpkey:DRTFM >nul&cscript //nologo ospp.vbs /remhst >nul&cscript //nologo ospp.vbs /ckms-domain >nul&cscript //nologo ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99 >nul
+set i=1
+:server
+if %i%==1 set KMS_Sev=kms.MSGuides.com
+if %i%==2 set KMS_Sev=kms2.MSGuides.com
+if %i%==3 set KMS_Sev=kms3.MSGuides.com
+if %i%==4 goto notsupported
+cscript //nologo ospp.vbs /sethst:%KMS_Sev% >nul
+echo ------------------------------------&echo.&echo.
+cscript //nologo ospp.vbs /act | find /i "successful" && (echo.& echo ====================================== & echo. & choice /n /c YN /m "Would you like to visit my blog [Y,N]?" & if errorlevel 2 exit) || (echo The connection to the server failed! Trying to connect to another one... & echo Please wait... & echo. & echo. & set /a i+=1 & goto server)
+explorer "http://MSGuides.com"&goto halt
+:notsupported
+echo.&echo ======================================&echo Sorry! Your version is not supported.&echo Please try installing the latest version here: bit.ly/getmsps
+:halt
+pause
+
