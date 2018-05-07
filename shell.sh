@@ -167,6 +167,8 @@ ssh-keygen
 cat /root/.ssh/id_rsa.pub
 # 克隆远程仓库到本地
 git clone git@github.com:username/repository.git
+# 添加远程仓库
+git remote add origin git@github.com:username/repository.git
 # 添加修改后的文件
 git add shell.sh
 # 提交修改
