@@ -35,12 +35,18 @@ public class ac extends AccessibilityService {
                 event.getPackageName().equals(pname)) {
             CharSequence className = event.getClassName();
             Log.d(PNAME, event.getPackageName().toString());
-            if (className.toString().equals(mall)) {
+            if (className.toString().equals(cpClassName)) {
                 Log.d(CLASS, className.toString());
-                AccessibilityNodeInfo info = getRootInActiveWindow();
-                List<AccessibilityNodeInfo> nodes = info.findAccessibilityNodeInfosByText(cp);
-                if(nodes != null) {
-                    info.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                AccessibilityNodeInfo rootNode = getRootInActiveWindow();
+                //List<AccessibilityNodeInfo> nodes = rootNode.findAccessibilityNodeInfosByText(cp);
+                if(rootNode != null) {
+                    int count = rootNode.getChildCount();
+                    for (int i = 0; i < count; i++) {
+                        AccessibilityNodeInfo nodeInfo = rootNode.getChild(i);
+                        if (nodeInfo == rootNode.findAccessibilityNodeInfosByText(collect)) {
+                            nodeInfo.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                        }
+                    }
                 }
 
             }
