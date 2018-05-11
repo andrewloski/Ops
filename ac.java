@@ -43,12 +43,12 @@ public class ac extends AccessibilityService {
                     int count = rootNode.getChildCount();
                     for (int i = 0; i < count; i++) {
                         AccessibilityNodeInfo nodeInfo = rootNode.getChild(i);
+                        Log.d(NODE, nodeInfo.toString());
                         if (nodeInfo == rootNode.findAccessibilityNodeInfosByText(collect)) {
                             nodeInfo.performAction(AccessibilityNodeInfo.ACTION_CLICK);
                         }
                     }
                 }
-
             }
         }
     }
