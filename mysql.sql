@@ -28,10 +28,19 @@ insert into students (name, course, score) values ('ada', 'math', 86);
 select * from students;
 --查询出每门课程的成绩都大于80的学生姓名
 select distinct name from students where name not in (select name from students where score <= 80);
+--授权用户在本机访问指定的数据库
+grant all on dbname.* to 'username'@'localhost' identified by 'password';
 --备份
 mysqldump -u root -ppasswd dbname >/home/dbname.sql     	 --备份库
 mysqldump -u root -ppasswd dbname tablename>/home/tablename.sql  --备份表
 mysqldump -u root -ppasswd --all-databases >/home/full.sql    	 --备份全库
+--解决数据库乱码问题
+show variables like 'character%';
+vi /etc/my.cnf.d/client.cnf
+default-character-set=utf8
+vi /etc/my.cnf.d/server.cnf
+character-set-server=utf8
+systemctl restart mariadb
 --配置主从复制
 --修改主服务器配置文件
 vim /etc/my.cnf
@@ -193,16 +202,17 @@ grant all on *.* to 'haproxy'@'192.168.217.%' identified by 'password';
 flush privileges;
 --主机名互相解析
 vi /etc/hosts
-192.168.217.129 haproxy-01
-192.168.217.134 haproxy-02
-192.168.217.135 haproxy-03
+192.168.217.129 mysql-01
+192.168.217.134 mysql-02
+192.168.217.135 haproxy-01
+192.168.217.136 haproxy-02
 --主机互信
 ssh-keygen -t rsa -P ''
+ssh-copy-id haproxy-01
 ssh-copy-id haproxy-02
-ssh-copy-id haproxy-03
 --验证互信
+ssh haproxy-01
 ssh haproxy-02
-ssh haproxy-03
 --安装时间同步工具并同步时间
 yum install ntp
 ntpdate s2c.time.edu.cn
@@ -250,7 +260,8 @@ listen state
     acl num1 src 192.168.0.0/16
     tcp-request content accept if num1
     tcp-request content reject
-
+--复制配置文件到haproxy-02
+scp /etc/haproxy/haproxy.cfg haproxy-02:/etc/haproxy/haproxy.cfg
 --打开ipv4非本地绑定，非必需
 echo 1 > /proc/sys/net/ipv4/ip_nonlocal_bind
 sysctl -p
@@ -268,5 +279,9 @@ exit
 mysql -uhaproxy -ppassword -h 192.168.217.135
 show slave status \G
 exit
+--Haproxy统计页面
+http://192.168.217.135:8080/haproxyadmin?stats
+http://192.168.217.136:8080/haproxyadmin?stats
+--keepalived实现haproxy高可用
 
 
