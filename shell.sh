@@ -190,9 +190,6 @@ https://myaccount.google.com/lesssecureapps
 echo "Send successfully" | mail -s "test" user@mail.com
 
 # nginx
-# 
-curl -I yl2883.com
-curl -I sheep23.com
 
 # git
 # 生成公钥
