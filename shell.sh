@@ -189,7 +189,161 @@ https://myaccount.google.com/lesssecureapps
 #发送测试邮件
 echo "Send successfully" | mail -s "test" user@mail.com
 
+# apache
+# apache php-fpm https
+yum install mod_ssl
+vi /etc/httpd/conf.modules.d/php-fpm.conf
+<FilesMatch \.php$>
+  SetHandler "proxy:fcgi://127.0.0.1:9000"
+</FilesMatch>
+vi /etc/httpd/conf.d/webapp.conf
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    ServerName domain.com
+    RewriteEngine On
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
+</VirtualHost>
+<VirtualHost *:80>
+	ServerAdmin admin@example.com
+    ServerName domain.com
+	RewriteEngine On
+	RewriteCond %{HTTPS} !=on
+	RewriteRule ^(.*) https://%{SERVER_NAME}/$1 [R,L]
+</VirtualHost>
+# 在相应的网站根目录新建 .htaccess
+# 强制301重定向 HTTPS
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
+</IfModule>
+# 只允许www.domain.com 跳转
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteCond %{HTTP_HOST} ^domain.com [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.domain.com [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
+# 高级用法 (可选）
+RewriteEngine on
+# 强制HTTPS
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{SERVER_PORT} 80
+# 某些页面强制
+RewriteCond %{REQUEST_URI} ^something_secure [OR]
+RewriteCond %{REQUEST_URI} ^something_else_secure
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+# 强制HTTP
+RewriteCond %{HTTPS} =on [OR]
+RewriteCond %{SERVER_PORT} 443
+# 某些页面强制
+RewriteCond %{REQUEST_URI} ^something_public [OR]
+RewriteCond %{REQUEST_URI} ^something_else_public
+RewriteRule .* http://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+vi /etc/httpd/conf.d/ssl.conf
+<VirtualHost *:443>
+    ServerName www.domain.com
+    ServerAlias domain.com
+    DocumentRoot "/var/www/html/webapp"
+    DirectoryIndex index.php
+    ErrorLog "/var/log/httpd/webapp-error_log"
+    CustomLog "/var/log/httpd/webapp-access_log" combined
+    SSLEngine on
+    SSLProtocol all -SSLv2 -SSLv3
+    SSLCertificateFile /etc/ssl/domain.com.crt
+    SSLCertificateKeyFile /etc/ssl/domain.com.key
+    SSLCertificateChainFile /etc/ssl/domain.com.ca-bundle
+</VirtualHost>
+# http
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    DocumentRoot "/var/www/html/webapp"
+    ServerName domain.com
+    DirectoryIndex index.php
+    ErrorLog "/var/log/httpd/webapp-error_log"
+    CustomLog "/var/log/httpd/webapp-access_log" combined
+</VirtualHost>
+vi /etc/httpd/conf/httpd.conf
+Listen 80
+Listen 443
+LoadModule ssl_module modules/mod_ssl.so
+Include conf.modules.d/*.conf
+IncludeOptional conf.d/*.conf
+
 # nginx
+# nginx代理php-fpm
+vi /etc/nginx/nginx.conf
+	server {
+        listen       80;
+        server_name  localhost;     
+            root   /opt/app;
+        location / {
+            #proxy_pass   http://127.0.0.1:8000;
+            index index.php  index.html index.htm;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1:8080;
+        #}
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        location ~ \.php$ {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
+	
+# https代理http
+vi /etc/nginx/nginx.conf
+server {
+        listen       80;
+        listen       443 ssl;
+        listen       [::]:80 default_server;
+        server_name  domain.com;
+        root         /usr/share/nginx/html;
+
+        ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
+        ssl_certificate /opt/ssl/domain.com.crt;
+        ssl_certificate_key /opt/ssl/domain.com.key;
+        ssl_prefer_server_ciphers on;
+
+        if ($server_port = 80) {
+                rewrite ^(.*)$ https://$host$1 permanent;
+        }
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        location / {
+                        proxy_pass http://127.0.0.1;
+        }
+
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+        }
+    }
+	
 
 # git
 # 生成公钥
