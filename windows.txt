@@ -4,6 +4,266 @@ https://www.microsoft.com/en-us/software-download/windows8ISO/
 chrome console
 var _0x5c09=["product-edition","getElementById","innerHTML","<option value='' selected='selected'>Select edition</option><option value='2'>Windows 7 Home Basic SP1 </option><option value='4'>Windows 7 Professional SP1 </option><option value='6'>Windows 7 Home Premium SP1 </option><option value='8'>Windows 7 Ultimate SP1 </option><option value='10'>Windows 7 Home Premium N SP1 </option><option value='12'>Windows 7 Professional N SP1 </option><option value='14'>Windows 7 Ultimate N SP1 </option><option value='16'>Windows 7 Professional K SP1 </option><option value='18'>Windows 7 Professional KN SP1 </option><option value='20'>Windows 7 Home Premium K SP1 </option><option value='22'>Windows 7 Home Premium KN SP1 </option><option value='24'>Windows 7 Ultimate KN SP1 </option><option value='26'>Windows 7 Ultimate K SP1 </option><option value='28'>Windows 7 Starter SP1 </option><option value='48'>Windows 8.1 Single Language </option><option value='52'>Windows 8.1 </option><option value='55'>Windows 8.1 N </option><option value='61'>Windows 8.1 K </option><option value='62'>Windows 8.1 KN </option><option value='68'>Windows 8.1 Professional LE </option><option value='69'>Windows 8.1 Professional LE K </option><option value='70'>Windows 8.1 Professional LE KN </option><option value='71'>Windows 8.1 Professional LE N </option><option value='75'>Windows 10 Education (Academic) th1</option><option value='76'>Windows 10 Education KN (Academic) th1</option><option value='77'>Windows 10 Education N (Academic) th1</option><option value='78'>Windows 10 China Get Genuine Chinese Simplified th1</option><option value='79'>Windows 10 th1</option><option value='80'>Windows 10 KN th1</option><option value='81'>Windows 10 N th1</option><option value='82'>Windows 10 Single Language th1</option><option value='83'>Windows 7 Home Basic SP1 COEM </option><option value='85'>Windows 7 Home Basic SP1 COEM GGK </option><option value='86'>Windows 7 Home Premium N SP1 COEM </option><option value='87'>Windows 7 Home Premium SP1 COEM </option><option value='88'>Windows 7 Home Premium SP1 COEM GGK </option><option value='89'>Windows 7 Home Premium K SP1 COEM </option><option value='90'>Windows 7 Professional N SP1 COEM </option><option value='91'>Windows 7 Professional SP1 COEM </option><option value='92'>Windows 7 Starter SP1 COEM </option><option value='93'>Windows 7 Ultimate K SP1 COEM </option><option value='94'>Windows 7 Ultimate KN SP1 COEM </option><option value='95'>Windows 7 Ultimate N SP1 COEM </option><option value='96'>Windows 7 Ultimate SP1 COEM </option><option value='97'>Windows 7 Home Premium KN SP1 COEM </option><option value='98'>Windows 7 Professional KN SP1 COEM </option><option value='99'>Windows 10 (1511 th2) </option><option value='100'>Windows 10 Education (1511 th2) </option><option value='101'>Windows 10 Education KN (1511 th2) </option><option value='102'>Windows 10 Education N (1511 th2) </option><option value='103'>Windows 10 China Get Genuine Chinese Simplified (1511 th2)</option><option value='104'>Windows 10 KN (1511 th2) </option><option value='105'>Windows 10 N (1511 th2) </option><option value='106'>Windows 10 Single Language (1511 th2) </option>","backgroundColor","style","blue","color","yellow","fontFamily","consolas","submit-product-edition","Confirm (WZT)","go to http://wzor.net/ or https://twitter.com/WZorNET or https://twitter.com/nummerok :D","log"],_0x1d62=[_0x5c09[0],_0x5c09[1],_0x5c09[2],_0x5c09[3],_0x5c09[4],_0x5c09[5],_0x5c09[6],_0x5c09[7],_0x5c09[8],_0x5c09[9],_0x5c09[10],_0x5c09[11],_0x5c09[12]],edititonbox=document[_0x1d62[1]](_0x1d62[0]);edititonbox[_0x1d62[2]]=_0x1d62[3],edititonbox[_0x1d62[5]][_0x1d62[4]]=_0x1d62[6],edititonbox[_0x1d62[5]][_0x1d62[7]]=_0x1d62[8],edititonbox[_0x1d62[5]][_0x1d62[9]]=_0x1d62[10],document[_0x1d62[1]](_0x1d62[11])[_0x1d62[2]]=_0x1d62[12],console[_0x5c09[14]](_0x5c09[13]);
 
+KMS Client Setup Keys：
+https://technet.microsoft.com/en-us/library/jj612867.aspx
+Windows Server 2016
+Operating system edition
+
+KMS Client Setup Key
+
+Windows Server 2016 Datacenter
+
+CB7KF-BWN84-R7R2Y-793K2-8XDDG
+
+Windows Server 2016 Standard
+
+WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY
+
+Windows Server 2016 Essentials
+
+JCKRF-N37P4-C2D82-9YXRT-4M63B
+
+Windows 10
+Operating system edition
+
+KMS Client Setup Key
+
+Windows 10 Professional
+
+W269N-WFGWX-YVC9B-4J6C9-T83GX
+
+Windows 10 Professional N
+
+MH37W-N47XK-V7XM9-C7227-GCQG9
+
+Windows 10 Enterprise
+
+NPPR9-FWDCX-D2C8J-H872K-2YT43
+
+Windows 10 Enterprise N
+
+DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4
+
+Windows 10 Education
+
+NW6C2-QMPVW-D7KKK-3GKT6-VCFB2
+
+Windows 10 Education N
+
+2WH4N-8QGBV-H22JP-CT43Q-MDWWJ
+
+Windows 10 Enterprise 2015 LTSB
+
+WNMTR-4C88C-JK8YV-HQ7T2-76DF9
+
+Windows 10 Enterprise 2015 LTSB N
+
+2F77B-TNFGY-69QQF-B8YKP-D69TJ
+
+Windows 10 Enterprise 2016 LTSB
+
+DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ
+
+Windows 10 Enterprise 2016 LTSB N
+
+QFFDN-GRT3P-VKWWX-X7T3R-8B639
+
+Windows Server 2012 R2 and Windows 8.1
+Operating system edition
+
+KMS Client Setup Key
+
+Windows 8.1 Professional
+
+GCRJD-8NW9H-F2CDX-CCM8D-9D6T9
+
+Windows 8.1 Professional N
+
+HMCNV-VVBFX-7HMBH-CTY9B-B4FXY
+
+Windows 8.1 Enterprise
+
+MHF9N-XY6XB-WVXMC-BTDCT-MKKG7
+
+Windows 8.1 Enterprise N
+
+TT4HM-HN7YT-62K67-RGRQJ-JFFXW
+
+Windows Server 2012 R2 Server Standard
+
+D2N9P-3P6X9-2R39C-7RTCD-MDVJX
+
+Windows Server 2012 R2 Datacenter
+
+W3GGN-FT8W3-Y4M27-J84CP-Q3VJ9
+
+Windows Server 2012 R2 Essentials
+
+KNC87-3J2TX-XB4WP-VCPJV-M4FWM
+
+Windows Server 2012 and Windows 8
+Operating system edition
+
+KMS Client Setup Key
+
+Windows 8 Professional
+
+NG4HW-VH26C-733KW-K6F98-J8CK4
+
+Windows 8 Professional N
+
+XCVCF-2NXM9-723PB-MHCB7-2RYQQ
+
+Windows 8 Enterprise
+
+32JNW-9KQ84-P47T8-D8GGY-CWCK7
+
+Windows 8 Enterprise N
+
+JMNMF-RHW7P-DMY6X-RF3DR-X2BQT
+
+Windows Server 2012
+
+BN3D2-R7TKB-3YPBD-8DRP2-27GG4
+
+Windows Server 2012 N
+
+8N2M2-HWPGY-7PGT9-HGDD8-GVGGY
+
+Windows Server 2012 Single Language
+
+2WN2H-YGCQR-KFX6K-CD6TF-84YXQ
+
+Windows Server 2012 Country Specific
+
+4K36P-JN4VD-GDC6V-KDT89-DYFKP
+
+Windows Server 2012 Server Standard
+
+XC9B7-NBPP2-83J2H-RHMBY-92BT4
+
+Windows Server 2012 MultiPoint Standard
+
+HM7DN-YVMH3-46JC3-XYTG7-CYQJJ
+
+Windows Server 2012 MultiPoint Premium
+
+XNH6W-2V9GX-RGJ4K-Y8X6F-QGJ2G
+
+Windows Server 2012 Datacenter
+
+48HP8-DN98B-MYWDG-T2DCC-8W83P
+
+Windows 7 and Windows Server 2008 R2
+Operating system edition
+
+KMS Client Setup Key
+
+Windows 7 Professional
+
+FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4
+
+Windows 7 Professional N
+
+MRPKT-YTG23-K7D7T-X2JMM-QY7MG
+
+Windows 7 Professional E
+
+W82YF-2Q76Y-63HXB-FGJG9-GF7QX
+
+Windows 7 Enterprise
+
+33PXH-7Y6KF-2VJC9-XBBR8-HVTHH
+
+Windows 7 Enterprise N
+
+YDRBP-3D83W-TY26F-D46B2-XCKRJ
+
+Windows 7 Enterprise E
+
+C29WB-22CC8-VJ326-GHFJW-H9DH4
+
+Windows Server 2008 R2 Web
+
+6TPJF-RBVHG-WBW2R-86QPH-6RTM4
+
+Windows Server 2008 R2 HPC edition
+
+TT8MH-CG224-D3D7Q-498W2-9QCTX
+
+Windows Server 2008 R2 Standard
+
+YC6KT-GKW9T-YTKYR-T4X34-R7VHC
+
+Windows Server 2008 R2 Enterprise
+
+489J6-VHDMP-X63PK-3K798-CPX3Y
+
+Windows Server 2008 R2 Datacenter
+
+74YFP-3QFB3-KQT8W-PMXWJ-7M648
+
+Windows Server 2008 R2 for Itanium-based Systems
+
+GT63C-RJFQ3-4GMB6-BRFB9-CB83V
+
+Windows Vista and Windows Server 2008
+Operating system edition
+
+KMS Client Setup Key
+
+Windows Vista Business
+
+YFKBB-PQJJV-G996G-VWGXY-2V3X8
+
+Windows Vista Business N
+
+HMBQG-8H2RH-C77VX-27R82-VMQBT
+
+Windows Vista Enterprise
+
+VKK3X-68KWM-X2YGT-QR4M6-4BWMV
+
+Windows Vista Enterprise N
+
+VTC42-BM838-43QHV-84HX6-XJXKV
+
+Windows Web Server 2008
+
+WYR28-R7TFJ-3X2YQ-YCY4H-M249D
+
+Windows Server 2008 Standard
+
+TM24T-X9RMF-VWXK6-X8JC9-BFGM2
+
+Windows Server 2008 Standard without Hyper-V
+
+W7VD6-7JFBR-RX26B-YKQ3Y-6FFFJ
+
+Windows Server 2008 Enterprise
+
+YQGMW-MPWTJ-34KDK-48M3W-X4Q6V
+
+Windows Server 2008 Enterprise without Hyper-V
+
+39BXF-X8Q23-P2WWT-38T2F-G3FPG
+
+Windows Server 2008 HPC
+
+RCTX3-KWVHP-BR6TB-RB6DM-6X7HP
+
+Windows Server 2008 Datacenter
+
+7M67G-PC374-GR742-YH8V4-TCBY3
+
+Windows Server 2008 Datacenter without Hyper-V
+
+22XQ2-VRXRG-P8D42-K34TD-G3QQC
+
+Windows Server 2008 for Itanium-Based Systems
+
+4DWFP-JF3DJ-B7DTH-78FJB-PDRHK
+
 Win7_Ult_SP1_Chinese(Simplified)_x64.iso
 MD5:	480b62c3acd6c8a36b18d9e906cd90d2
 SHA1:	2ce0b2db34d76ed3f697ce148cb7594432405e23
@@ -37,7 +297,7 @@ cd C:\Program Files\Microsoft Office\Office16
 for /f %x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
 for /f %x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
 cscript OSPP.VBS /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99
-cscript ospp.vbs /sethst:192.168.1.5
+cscript ospp.vbs /sethst:kms.chinancce.com
 cscript ospp.vbs /act
 
 Windows10 key
@@ -63,6 +323,11 @@ MRX3F-47B9T-2487J-KWKMF-RPWBY
 THMPV-77D6F-94376-8HGKG-VRDRQ
 CB9YB-Q73J8-RKPMH-M2WFT-P4WQJ
 
+Windows Server 2008 R2 Enterprise
+489J6-VHDMP-X63PK-3K798-CPX3Y
+kms.chinancce.com
+
+
 office.bat
 @echo off
 title Activate Microsoft Office 2016 ALL versions for FREE!&cls&echo =====================================&echo #Copyright: MSGuides.com&echo =====================================&echo.&echo #Supported products:&echo - Microsoft Office Standard 2016&echo - Microsoft Office Professional Plus 2016&echo.&echo.
@@ -87,3 +352,43 @@ echo.&echo ======================================&echo Sorry! Your version is no
 :halt
 pause
 
+Ato.bat
+title Windows 8.1 Professional activator
+@echo off
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /skms kms.chinancce.com >nul
+wscript //nologo c:\windows\system32\slmgr.vbs /ato
+
+WinAto.bat
+@echo off
+title Windows 10 ALL version activator&cls&echo ************************************ &echo Copyright: Marquis &echo.&echo Supported products:&echo - Windows 10 Home&echo - Windows 10 Professional&echo - Windows 10 Enterprise, Enterprise LTSB&echo - Windows 10 Education&echo.&echo.&echo ************************************ &echo Windows 10 activation...
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk TX9XD-98N7V-6WMQ6-BX7FG-H8Q99 >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk 3KHY7-WNT83-DGQKR-F7HPR-844BM >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk 7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk PVMJN-6DFY6-9CCP6-7BKTT-D3WVR >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk MH37W-N47XK-V7XM9-C7227-GCQG9 >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk NW6C2-QMPVW-D7KKK-3GKT6-VCFB2 >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk NW6C2-QMPVW-D7KKK-3GKT6-VCFB2 >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk 2WH4N-8QGBV-H22JP-CT43Q-MDWWJ >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43 >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4 >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk WNMTR-4C88C-JK8YV-HQ7T2-76DF9 >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ipk 2F77B-TNFGY-69QQF-B8YKP-D69TJ >nul
+echo ************************************ &echo.&echo.&set i=1
+:server
+if %i%==1 set KMS_Sev=kms.chinancce.com
+if %i%==2 set KMS_Sev=NextLevel.uk.to
+if %i%==3 set KMS_Sev=GuangPeng.uk.to
+if %i%==4 set KMS_Sev=AlwaysSmile.uk.to
+if %i%==5 set KMS_Sev=kms.chinancce.com 
+if %i%==6 set KMS_Sev=kms.shuax.com
+if %i%==7 exit
+cscript //nologo c:\windows\system32\slmgr.vbs /skms %KMS_Sev% >nul
+cscript //nologo c:\windows\system32\slmgr.vbs /ato | find /i "successfully" && (echo.&  ************************************ & echo. & choice /n /c YN /m "Do you want to restart your PC now [Y,N]?" & if errorlevel 2 exit) || (echo The connection to the server failed! Trying to connect to another one... & echo Please wait... & echo. & echo. & set /a i+=1 & goto server)
+shutdown.exe /r /t 00
+
+kms：
+kms.chinancce.com
+kms.shuax.com
+kms.luody.info
