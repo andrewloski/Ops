@@ -473,4 +473,12 @@ touch /.autorelabel
 exec /sbin/init
 exec /sbin/reboot
 
-
+# redis 备份恢复
+redis-cli
+bgsave
+config get dir
+# 将dump.rdb拷贝到config get dir得到的目录
+systemctl start redis
+redis-cli
+keys *
+lrange key 0 1
