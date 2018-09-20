@@ -482,6 +482,8 @@ systemctl start redis
 redis-cli
 keys *
 lrange key 0 1
+hgetall key
+hset key field value
 
 # docker
 # laradock
@@ -497,3 +499,19 @@ docker-compose exec workspace bash
 vi laradock/nginx/sites/default.conf
 mkdir public
 vi public/index.html
+
+# kali
+docker pull kalilinux/kali-linux-docker
+docker run -t -i kalilinux/kali-linux-docker /bin/bash
+apt-get update && apt-get install metasploit-framework
+passwd
+apt-get install openssh-server --fix-missing -y
+vi /etc/ssh/sshd_config
+PermitRootLogin yes
+apt-get install sqlmap
+apt-get install kali-linux-all
+exit
+docker commit id ssh:kali
+docker images
+docker run -p 22:22 -it ssh:kali
+service ssh start
