@@ -482,3 +482,18 @@ systemctl start redis
 redis-cli
 keys *
 lrange key 0 1
+
+# docker
+# laradock
+git clone https://github.com/Laradock/laradock.git
+cd laradock
+cp env-example .env
+vi .env
+DB_HOST=mysql
+REDIS_HOST=redis
+QUEUE_HOST=beanstalkd
+docker-compose up -d nginx mysql phpmyadmin redis workspace
+docker-compose exec workspace bash
+vi laradock/nginx/sites/default.conf
+mkdir public
+vi public/index.html
