@@ -486,6 +486,15 @@ hgetall key
 hset key field value
 
 # docker
+# 查看docker磁盘占用
+docker system df
+# 删除container
+docker rm id
+# 清理磁盘，删除关闭的容器、无用的数据卷和网络，以及无tag的镜像
+docker system prune
+# 删除images
+docker rmi id 
+
 # laradock
 git clone https://github.com/Laradock/laradock.git
 cd laradock
