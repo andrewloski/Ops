@@ -131,3 +131,9 @@ dism /Online /Get-Features | findstr DNS
 dism /Online /Get-Features | findstr Deployment
 REM 安装WDS
 dism /Online /Enable-feature /Featurename: /Featurename:Microsoft-Windows-Deployment-Services-ServerCore /Featurename:Microsoft-Windows-Deployment-Services-Transport-Server-Services-ServerCore
+cd /d E:\sources
+REM 获取ESD文件包含的安装镜像
+dism/get-wiminfo/WimFile:install.esd
+REM 转换ESD安装镜像
+dism /export-image /SourceImageFile:install.esd /SourceIndex:4 /DestinationImageFile:D:\install.wim /compress:max /CheckIntegrity
+
