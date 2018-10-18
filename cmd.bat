@@ -131,6 +131,8 @@ dism /Online /Get-Features | findstr DNS
 dism /Online /Get-Features | findstr Deployment
 REM 安装WDS
 dism /Online /Enable-feature /Featurename: /Featurename:Microsoft-Windows-Deployment-Services-ServerCore /Featurename:Microsoft-Windows-Deployment-Services-Transport-Server-Services-ServerCore
+REM 初始化WDS服务器设置服务器名和远程安装目录
+wdsutil /verbose /Progress /Initialize-Server /Server:WDS /remInst:"D:\remoteInstall"
 
 REM 装载ISO文件并进入sources目录
 cd /d E:\sources
