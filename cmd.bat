@@ -113,7 +113,7 @@ DISM /Online /Cleanup-image /RestoreHealth
 REM 若要使用你自己的一些来源，不使用 Windows 更新来修复一个联机映像，则键入：
 Dism /Online /Cleanup-Image /RestoreHealth /Source:c:\test\mount\windows /LimitAccess
 REM 验证和修复系统文件
-sfc /sannow
+sfc /scannow
 
 REM WinPE
 cd /d F:\adk\Assessment and Deployment Kit\Windows Preinstallation Environment
