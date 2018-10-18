@@ -131,9 +131,22 @@ dism /Online /Get-Features | findstr DNS
 dism /Online /Get-Features | findstr Deployment
 REM 安装WDS
 dism /Online /Enable-feature /Featurename: /Featurename:Microsoft-Windows-Deployment-Services-ServerCore /Featurename:Microsoft-Windows-Deployment-Services-Transport-Server-Services-ServerCore
+
+REM 装载ISO文件并进入sources目录
 cd /d E:\sources
 REM 获取ESD文件包含的安装镜像
 dism /get-wiminfo /WimFile:install.esd
 REM 转换ESD安装镜像
 dism /export-image /SourceImageFile:install.esd /SourceIndex:4 /DestinationImageFile:D:\install.wim /compress:max /CheckIntegrity
+REM 通过使用 DISM 装载你要添加应答文件的 Windows 映像
+Dism /Mount-Image /ImageFile:F:\sys\install.wim /Index:1 /MountDir:F:\sys\offline
+REM 使用 DISM 将应答文件应用到装载的 Windows 映像
+DISM /Image:F:\sys\offline /Apply-Unattend:F:\sys\autounattend.xml
+REM 卸载 .wim 文件并提交更改
+Dism /Unmount-Image /MountDir:F:\sys\offline /Commit
+
+
+
+
+
 
