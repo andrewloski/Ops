@@ -115,6 +115,15 @@ Dism /Online /Cleanup-Image /RestoreHealth /Source:c:\test\mount\windows /LimitA
 REM 验证和修复系统文件
 sfc /scannow
 
+REM 系统备份
+dism /capture-image /imagefile:D:\Win10Pro.wim /capturedir:C:\ /Name:Win10Pro /description:0000-00-00
+REM 系统还原
+Dism /apply-image /imagefile:D:\Win10Pro.wim /index:1 /applydir:C:\
+REM 添加启动引导
+bcdboot C:\windows /s C: /l zh-cn
+REM 运行 Sysprep 以准备要捕获的 Windows 安装并结合无人值守应答文件
+sysprep /generalize /oobe /shutdown /unattend:F:\unattend.xml
+
 REM WinPE
 cd /d F:\adk\Assessment and Deployment Kit\Windows Preinstallation Environment
 notepad copype.cmd
