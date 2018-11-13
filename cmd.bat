@@ -1,6 +1,9 @@
 rem Windows command prompt
 rem cmd提权
-doskey su=runas /user:administrator cmd
+doskey su=runas /u:admin cmd
+su
+REM 设置UTF-8编码
+chcp 65001
 
 rem U盘分区
 diskpart
@@ -58,6 +61,11 @@ netsh interface ip add dns name="以太网" addr=8.8.4.4
 REM DHCP
 netsh interface ip set address "以太网" dhcp
 netsh interface ip set dns name="以太网" source=dhcp
+
+REM　关闭笔记本内置键盘
+sc config i8042prt start=disabled
+REM　启用笔记本内置键盘
+sc config i8042prt start=demand
 
 REM 根据程序名称强制杀掉进程
 taskkill /F /IM app.exe >nul 2>nul
@@ -158,8 +166,33 @@ DISM /Image:F:\sys\offline /Apply-Unattend:F:\sys\autounattend.xml
 REM 卸载 .wim 文件并提交更改
 Dism /Unmount-Image /MountDir:F:\sys\offline /Commit
 
+GoogleDNS.bat
+@echo off
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\configuration"
+if '%errorlevel%' NEQ '0' (
+goto UACPrompt
+) else ( goto gotAdmin )
+:UACPrompt
+echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+"%temp%\getadmin.vbs"
+exit /B
+:gotAdmin
+if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+pushd "%CD%"
+CD /D "%~dp0"
+@echo off
+netsh interface ip set dns name="以太网" source=static addr=8.8.8.8 register=primary
+netsh interface ip add dns name="以太网" addr=8.8.4.4
+netsh interface ip set dns name="本地连接" source=static addr=8.8.8.8 register=primary
+netsh interface ip add dns name="本地连接" addr=8.8.4.4
 
+REM 自动DNS
+netsh interface ip set dns name="以太网" source=dhcp
+netsh interface ip set dns name="本地连接" source=dhcp
 
-
-
-
+REM AP
+netsh wlan set hostednetwork mode=allow ssid=WirelessAP key=12345678
+netsh wlan start hostednetwork
+REM disable AP
+netsh wlan set hostednetwork mode=disallow
