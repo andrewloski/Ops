@@ -401,12 +401,12 @@ js/chrome/abstract_web_client.js
 http://172.16.10.247/web?#
 # Odoo.com
 cd /usr/local/lib/python3.6/site-packages/odoo-11.0.post20180515-py3.6.egg
-sed -i 's/Odoo.com/Marquis.com/g;s/odoo.com/marquis.com/' `egrep -rl 'Odoo.com|odoo.com' /opt ./odoo`
+sed -i 's/Odoo.com/Andrew.com/g;s/odoo.com/andrew.com/' `egrep -rl 'Odoo.com|odoo.com' /opt ./odoo`
 # Powered by
 Login Layout
 web.menu_secondary
 # Handle in Odoo
-sed -i 's/Handle in Odoo/Handle in Marquis/g' `grep -rl 'Handle in Odoo' /opt ./odoo`
+sed -i 's/Handle in Odoo/Handle in Andrew/g' `grep -rl 'Handle in Odoo' /opt ./odoo`
 
 # trafficserver
 wget http://archive.apache.org/dist/trafficserver/trafficserver-7.1.3.tar.bz2
