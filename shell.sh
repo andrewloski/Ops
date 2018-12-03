@@ -194,7 +194,51 @@ echo "Send successfully" | mail -s "test" user@mail.com
 curl -sS https://getcomposer.org/installer | php71
 php71 composer.phar install
 
-# apache
+# Apache
+# 网页报错：HTTP ERROR 500，猜测是SELinux引起的问题
+getenforce
+Enforcing
+setenforce 0
+# 网页能正常访问
+setenforce 1
+# 网页无法访问，查看系统审计日志找到如下：avc:  denied
+tail /var/log/audit/audit.log
+type=AVC msg=audit(1543856777.173:324): avc:  denied  { write } for  pid=1870 comm="php-fpm" name="cacheconfig" dev="dm-0" ino=50971264 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:httpd_sys_content_t:s0 tclass=dir
+type=SYSCALL msg=audit(1543856777.173:324): arch=c000003e syscall=21 success=no exit=-13 a0=7fd72466d308 a1=2 a2=0 a3=e5593773b56a4580 items=0 ppid=1101 pid=1870 auid=4294967295 uid=48 gid=48 euid=48 suid=48 fsuid=48 egid=48 sgid=48 fsgid=48 tty=(none) ses=4294967295 comm="php-fpm" exe="/opt/remi/php71/root/usr/sbin/php-fpm" subj=system_u:system_r:httpd_t:s0 key=(null)
+type=PROCTITLE msg=audit(1543856777.173:324): proctitle=7068702D66706D3A20706F6F6C20777777
+# 查看SELinux avc denied访问权限
+audit2allow -w -a
+type=AVC msg=audit(1543866684.962:473): avc:  denied  { write } for  pid=1612 comm="php-fpm" name="cacheconfig" dev="dm-0" ino=50971264 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:httpd_sys_content_t:s0 tclass=dir
+	Was caused by:
+	The boolean httpd_unified was set incorrectly. 
+	Description:
+	Allow httpd to unified
+
+	Allow access by executing:
+	# setsebool -P httpd_unified 1
+# 修改SELinux布尔值
+setsebool -P httpd_unified 1
+getsebool -a | grep httpd | grep httpd_unified
+httpd_unified --> on
+# 网页报错连接数据库失败（Cannot connect to database），再次查看SELinux avc denied访问权限
+audit2allow -w -a
+type=AVC msg=audit(1543866141.159:391): avc:  denied  { name_connect } for  pid=1960 comm="php-fpm" dest=3306 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:mysqld_port_t:s0 tclass=tcp_socket
+	Was caused by:
+	One of the following booleans was set incorrectly.
+	Description:
+	Allow httpd to can network connect
+
+	Allow access by executing:
+	# setsebool -P httpd_can_network_connect 1
+	Description:
+	Allow httpd to can network connect db
+
+	Allow access by executing:
+	# setsebool -P httpd_can_network_connect_db 1
+# 修改SELinux布尔值为Apache连接数据库放行
+setsebool -P httpd_can_network_connect_db=1
+getsebool -a | grep httpd | grep httpd_can_network_connect_db
+httpd_can_network_connect_db --> on
 # apache php-fpm https
 yum install mod_ssl
 vi /etc/httpd/conf.modules.d/php-fpm.conf
