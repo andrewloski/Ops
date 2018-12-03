@@ -41,6 +41,14 @@ default-character-set=utf8
 vi /etc/my.cnf.d/server.cnf
 character-set-server=utf8
 systemctl restart mariadb
+--解决mysql数据库乱码问题
+[mysqld]
+character_set_server = utf8
+systemctl restart mysqld
+--建立数据库时指定编码： 
+create database dbname character set utf8; 
+--修改数据库编码： 
+alter database dbname character set utf8; 
 --配置主从复制
 --修改主服务器配置文件
 vim /etc/my.cnf
