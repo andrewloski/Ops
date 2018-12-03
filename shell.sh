@@ -189,6 +189,11 @@ https://myaccount.google.com/lesssecureapps
 #发送测试邮件
 echo "Send successfully" | mail -s "test" user@mail.com
 
+# PHP
+# composer
+curl -sS https://getcomposer.org/installer | php71
+php71 composer.phar install
+
 # apache
 # apache php-fpm https
 yum install mod_ssl
