@@ -644,3 +644,184 @@ ssh -CNf -D 0.0.0.0:9999 root@zfl9.com
 # socks 协议估计大家都比较熟悉，最大的用途就是 FQ 科学上网了
 # 这时候只要在 Chrome/Firefox 上配置 socks5 代理就可以畅游互联网了！
 # 不过前提是你的服务器不在大陆，比如可以是香港的、日本的，速度都比较快！
+
+# rsync 数据同步备份
+# 在实际生产中，数据备份与同步是非常重要的事情！比如网站的一些重要文件，MySQL 数据库的热备等等。
+# rsync配置
+# rsync 是 Linux 自带的远程数据备份同步工具，使用及配置都很简单；
+# 要使用 rsync，首先要配置 rsync 服务器，客户端和服务器都要安装 rsync；
+
+## 安装 rsync
+yum -y install rsync
+
+## rsyncd.conf 主配置文件
+--- /etc/rsyncd.conf ---
+uid = root
+gid = root
+use chroot = no
+
+# 口令文件
+secrets file = /etc/rsyncd.secrets
+
+# 默认情况下，客户端不能修改服务器的文件，除非添加 'read only = no'；
+
+[test]
+       path = /root/test
+       comment = test
+       auth users = root    # 认证的用户
+--- /etc/rsyncd.conf ---
+
+## rsyncd.secrets 口令文件
+--- /etc/rsyncd.secrets ---
+root:123456
+--- /etc/rsyncd.secrets ---
+
+## 修改口令文件的权限为 600
+chmod 600 /etc/rsyncd.secrets
+
+## 启动 rsyncd 服务
+systemctl enable rsyncd     # 开机自启
+systemctl start rsyncd      # 运行服务
+systemctl -l status rsyncd  # 查看状态
+
+#  rsync使用
+## 命令格式
+rsync [option] src dst
+# -a：归档
+# -z：压缩
+# -v：verbose
+# -P：进度等信息
+# --delete：删除src没有而dst上有的文件
+# --exclude：排除某些文件
+# --exclude-from：从指定文件读取排除参数
+# --password-file：指定密码文件（权限为 600）
+
+## 命令举例
+rsync -azvP root@192.168.255.105::test /tmp/test
+
+# 指定密码文件
+echo '123456' > /root/.rsync.passwd && chmod 600 /root/.rsync.passwd
+rsync -azvP --password-file=/root/.rsync.passwd root@192.168.255.105::test /tmp/test
+
+# 删除本地没有而服务器上有的文件
+rsync -azvP --delete --password-file=/root/.rsync.passwd /tmp/test/ root@192.168.255.105::test
+
+# 排除以 .bak 结尾的文件
+rsync -azvP --exclude=*.bak --password-file=/root/.rsync.passwd root@192.168.255.105::test /tmp/test
+
+# 从指定文件中读取排除参数
+echo '*.bak' > /root/.exclude.rsync
+rsync -azvP --exclude-from=/root/.exclude.rsync --password-file=/root/.rsync.passwd root@192.168.255.105::test /tmp/test
+
+# 从本地上传数据到服务器：把 src 和 dst 互换即可
+
+# 查看目标的所有文件
+rsync -v rsync://root@192.168.255.105::test
+
+# 内核参数调优
+# 系统默认参数一般都是比较保守的，我们可以通过调整系统参数来提高系统内存、CPU、内核资源的占用，通过禁用不必要的服务、端口，来提高系统的安全性，更好的发挥系统的可用性。文件描述符
+#ulimit 资源限制
+
+### 用户限制
+--- /etc/security/limits.conf ---
+root soft nofile 102400
+root hard nofile 102400
+
+### 内核限制
+--- /etc/sysctl.conf ---
+fs.file-max = 10240000
+
+sysctl -p   # 立即生效
+
+### 重新登录 shell
+ulimit -n                   # 查看当前shell的最大文件描述符数
+sysctl -a | grep file-max   # 查看当前内核的最大文件描述符数
+cat /proc/sys/fs/file-nr    # 分别表示：已分配的句柄数、已分配未使用的句柄数、file-max 值
+# 关闭三键重启
+# 仅针对 CentOS 6.x
+
+--- /etc/init/control-alt-delete.conf ---
+#exec /sbin/shutdown -r now "Control-Alt-Deletepressed"
+# 隐藏系统信息
+echo "Welcome to Server" > /etc/issue
+echo "Welcome to Server" > /etc/centos-release
+# 命令历史记录
+--- /etc/profile ---
+export HISTSIZE=10000
+export HISTCONTROL=ignoredups   # 忽略重复记录
+# ntp 时间同步
+# ntp 时间同步（CentOS 6.x）、chrony 时间同步（CentOS 7.x）
+
+## 常用公共ntp服务器
+time.windows.com
+cn.pool.ntp.org
+tw.pool.ntp.org
+
+## 手动更新时间
+ntpdate -u time.windows.com
+
+## 设置时区为上海:
+CentOS 6.x：ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+CentOS 7.x：timedatectl set-timezone Asia/Shanghai
+# 内核参数优化
+### VPS 服务器配置（1G 内存）
+--- /etc/sysctl.conf ---
+net.ipv4.ip_forward = 1
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_tw_reuse = 0
+net.ipv4.tcp_tw_recycle = 0
+net.ipv4.tcp_fin_timeout = 3
+net.ipv4.ip_local_port_range = 10000 65535
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_max_syn_backlog = 10240
+net.core.netdev_max_backlog = 10240
+net.core.somaxconn = 10240
+net.ipv4.tcp_syn_retries = 2
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_max_orphans = 3276800
+net.ipv4.tcp_keepalive_time = 120
+net.ipv4.tcp_keepalive_intvl = 30
+net.ipv4.tcp_keepalive_probes = 3
+net.core.rmem_default = 8388608
+net.core.wmem_default = 8388608
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+net.ipv4.tcp_rmem = 65536 786432 2097152
+net.ipv4.tcp_wmem = 65536 786432 2097152
+net.ipv4.tcp_mem = 177945 216076 254208
+net.ipv4.tcp_fastopen = 3
+fs.file-max = 500000000
+
+### 内核参数详解
+net.ipv4.ip_forward = 1                     # 允许网卡之间的数据包转发
+net.ipv4.tcp_syncookies = 1                 # 启用syncookies, 可防范少量syn攻击
+net.ipv4.tcp_tw_reuse = 0                   # 重用time_wait的tcp端口(建议禁用)
+net.ipv4.tcp_tw_recycle = 0                 # 启用time_wait快速回收机制(建议禁用)
+net.ipv4.tcp_fin_timeout = 3                # fin_wait_2超时时间
+net.ipv4.ip_local_port_range = 10000 65535  # 动态分配端口的范围
+net.ipv4.tcp_max_tw_buckets = 5000          # time_wait套接字最大数量，高于该值系统会立即清理并打印警告信息
+net.ipv4.tcp_max_syn_backlog = 10240        # syn队列长度
+net.core.netdev_max_backlog = 10240         # 最大设备队列长度
+net.core.somaxconn = 10240                  # listen()的默认参数, 等待请求的最大数量
+net.ipv4.tcp_syn_retries = 2                # 放弃建立连接前内核发送syn包的数量
+net.ipv4.tcp_synack_retries = 2             # 放弃连接前内核发送syn+ack包的数量
+net.ipv4.tcp_max_orphans = 3276800          # 设定最多有多少个套接字不被关联到任何一个用户文件句柄上
+net.ipv4.tcp_keepalive_time = 120           # keepalive idle空闲时间
+net.ipv4.tcp_keepalive_intvl = 30           # keepalive intvl间隔时间
+net.ipv4.tcp_keepalive_probes = 3           # keepalive probes最大探测次数
+net.core.rmem_default = 8388608             # socket默认读buffer大小
+net.core.wmem_default = 8388608             # socket默认写buffer大小
+net.core.rmem_max = 16777216                # socket最大读buffer大小
+net.core.wmem_max = 16777216                # socket最大写buffer大小
+net.ipv4.tcp_rmem = 65536 786432 2097152    # tcp_socket读buffer大小
+net.ipv4.tcp_wmem = 65536 786432 2097152    # tcp_socket写buffer大小
+net.ipv4.tcp_mem = 177945 216076 254208     # 确定tcp栈应该如何反映内存使用
+net.ipv4.tcp_fastopen = 3                   # 开启tcp_fastopen（内核 3.7 +）
+fs.file-max = 500000000                     # 最大允许的文件描述符数量
+
+## net/ipv4/tcp_mem 解释
+net.ipv4.tcp_mem = 94500000 915000000 927000000
+net.ipv4.tcp_mem[0]: 低于此值，TCP没有内存压力      # 80% of Memory
+net.ipv4.tcp_mem[1]: 在此值下，进入内存压力阶段     # 90% of Memory
+net.ipv4.tcp_mem[2]: 高于此值，TCP拒绝分配socket    # 100% of Memory
+# 内存单位是页（1页=4kb），可根据物理内存大小进行调整，如果内存足够大的话，可适当往上调
