@@ -573,3 +573,74 @@ docker commit id ssh:kali
 docker images
 docker run -p 22:22 -it ssh:kali
 service ssh start
+
+# ssh-tunnel：本地端口转发、远程端口转发、动态端口转发
+# 本地端口转发
+ssh -L [listen_ip:]listen_port:target_ip:target_port user@ssh_server
+# -L 选项：本地端口转发
+# listen_ip：本地监听地址，默认为127.0.0.1和[::1]
+# listen_port：本地监听端口
+# target_ip：目的主机地址，即要转发给谁
+# target_port：目的主机端口
+
+# 通常我们使用端口转发时，是不需要登录远程主机的，因此可以使用 -CNf 选项
+# -C 选项：启用压缩，节省带宽资源
+# -N 选项：不登陆shell，即不会打开 shell 进程
+# -f 选项：后台运行，即守护进程模式
+
+# 命令举例：
+ssh -CNf -L 192.168.1.101:80:ip.cn:80 root@zfl9.com
+ssh -CNf -L 80:ip.cn:80 root@zfl9.com        # 监听127.0.0.1 [::1]
+ssh -CNf -L :80:ip.cn:80 root@zfl9.com       # 监听0.0.0.0 [::]
+ssh -CNf -L *:80:ip.cn:80 root@zfl9.com      # 同上
+ssh -CNf -L 0.0.0.0:ip.cn:80 root@zfl9.com   # 监听0.0.0.0
+ssh -CNf -L \[::\]:80:ip.cn:80 root@zfl9.com # 监听[::]
+
+# 应用举例：
+ssh -CNf -L 8080:ip.cn:80 root@zfl9.com
+# 执行完毕后，ssh会在本地监听 127.0.0.1:8080 地址
+# 任何发往 127.0.0.1:8080 的数据包都会通过 ssh 隧道被 ssh_server 转发给 ip.cn:80
+# 当 ip.cn:80 响应后，ssh_server 会将响应数据包通过 ssh 隧道转发给本地主机
+# 因此下面的命令会打印出 ssh 服务器的 IP 地址信息
+curl -x 127.0.0.1:8080 ip.cn
+
+# 远程端口转发
+ssh -R server_listen_port:target_ip:target_port user@ssh_server
+# -R 选项：远程端口转发
+# server_listen_port：ssh_server 监听端口，这里不能指定监听地址，默认是 127.0.0.1 和 [::1]
+# target_ip：目的主机地址，一般这个地址是当前主机可访问的
+# target_port：目的主机端口
+
+# 应用举例：
+ssh -CNf -R 8080:ip.cn:80 root@zfl9.com
+# 执行完毕后，ssh_server 会在服务器上监听 127.0.0.1:8080 地址
+# 任何发往 ssh_server 127.0.0.1:8080 的数据包都会通过 ssh 隧道被本地主机转发给 ip.cn:80
+# 当 ip.cn:80 响应后，本地主机会将响应数据包通过 ssh 隧道转发给 ssh_server 主机
+# 可以看出，远程端口转发和本地端口转发是一个相反的流程。
+# 所以，在 ssh_server 上执行下面的命令会打印出本地主机的 IP 地址信息
+curl -x 127.0.0.1:8080 ip.cn
+
+# 最典型的应用 - 穿透 NAT
+# 比如我在自己家里搭建了一台内网 http 服务器，
+# 平时我都是在内网环境中进行访问的，完全没问题。
+# 但是，我现在想在公网环境下访问我的内网 http 服务器，该怎么做？
+# 因为在内网环境中上网都是要经过路由器网关的，均做了 NAT 转换。
+# 出去容易，但是进来就比较难了，被路由器挡住了。
+# 这时就可以利用远程端口转发进行NAT穿透：
+# 首先在本地主机执行 ssh 命令，假设内网 http 服务器地址为 192.168.1.100:80
+ssh -CNf -R 8080:192.168.1.100:80 root@zfl9.com
+# 然后登录 ssh_server 服务器，执行以下命令就可以访问网页了
+curl -x 127.0.0.1:8080 192.168.1.100
+
+# 动态端口转发
+ssh -D listen_ip:listen_port user@ssh_server
+# -D 选项：动态端口转发，其实应该说是 socks5 代理
+# listen_ip：监听地址
+# listen_port：监听端口
+
+# 应用举例：
+ssh -CNf -D 0.0.0.0:9999 root@zfl9.com
+# 执行完毕后，ssh 会监听地址 0.0.0.0:9999，该地址提供 socks5 代理
+# socks 协议估计大家都比较熟悉，最大的用途就是 FQ 科学上网了
+# 这时候只要在 Chrome/Firefox 上配置 socks5 代理就可以畅游互联网了！
+# 不过前提是你的服务器不在大陆，比如可以是香港的、日本的，速度都比较快！
