@@ -392,7 +392,62 @@ server {
             location = /50x.html {
         }
     }
-	
+    
+# nginx安装及全站https域名部署脚本
+#!/bin/sh
+cat > /etc/yum.repos.d/nginx.repo << EOF
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/7/\$basearch/
+gpgcheck=0
+enabled=1
+EOF
+yum install nginx unzip lrzsz -y
+systemctl enable nginx
+systemctl start nginx
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+firewall-cmd --reload
+domain=/root/domain
+l=$(cat /root/domain | wc -l)
+for ((i=1;i<=$l;i++))
+do
+d=$(sed -n "$i"p $domain)
+cat > /etc/nginx/conf.d/$d.conf << EOF
+server {
+    listen       80;
+    listen       443 ssl;
+    server_name  $d www.$d m.$d *.$d;
+    root         /usr/share/nginx/html/$d;
+
+    ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
+    ssl_certificate /etc/ssl/$d.crt;
+    ssl_certificate_key /etc/ssl/$d.key;
+    ssl_prefer_server_ciphers on;
+
+    if (\$server_port = 80) {
+        rewrite ^(.*)$ https://\$host\$1 permanent;
+    }
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/default.d/*.conf;
+
+    location / {
+        index index.htm index.html;
+    }
+
+    error_page 404 /404.html;
+        location = /40x.html {
+    }
+
+    error_page 500 502 503 504 /50x.html;
+                location = /50x.html {
+    }
+}
+EOF
+done
+getenforce
+firewall-cmd --list-ports	
 
 # git
 # 生成公钥
