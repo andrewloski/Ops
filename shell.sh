@@ -405,6 +405,7 @@ EOF
 yum install nginx unzip lrzsz -y
 systemctl enable nginx
 systemctl start nginx
+sed -i '/access_log/a\    server_names_hash_bucket_size 128;' /etc/nginx/nginx.conf
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --reload
@@ -446,6 +447,7 @@ server {
 }
 EOF
 done
+nginx -s reload
 getenforce
 firewall-cmd --list-ports	
 
