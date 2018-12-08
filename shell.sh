@@ -251,14 +251,14 @@ vi /etc/httpd/conf.d/webapp.conf
     ServerName domain.com
     RewriteEngine On
     RewriteCond %{SERVER_PORT} 80
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R,L]
 </VirtualHost>
 <VirtualHost *:80>
 	ServerAdmin admin@example.com
     ServerName domain.com
 	RewriteEngine On
 	RewriteCond %{HTTPS} !=on
-	RewriteRule ^(.*) https://%{SERVER_NAME}/$1 [R,L]
+	RewriteRule ^(.*) https://%{SERVER_NAME}$1 [R,L]
 </VirtualHost>
 # 在相应的网站根目录新建 .htaccess
 # 强制301重定向 HTTPS
@@ -319,6 +319,70 @@ Listen 443
 LoadModule ssl_module modules/mod_ssl.so
 Include conf.modules.d/*.conf
 IncludeOptional conf.d/*.conf
+# apache安装及全站https域名部署脚本
+#!/bin/sh
+yum install httpd mod_ssl lrzsz unzip -y
+systemctl start httpd
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+firewall-cmd --reload
+systemctl enable httpd
+domain=/root/domain
+wwwroot=/root/wwwroot
+l=$(cat /root/domain | wc -l)
+for ((i=1;i<=$l;i++))
+do
+d=$(sed -n "$i"p $domain)
+w=$(sed -n "$i"p $wwwroot)
+#cat > /etc/httpd/conf.d/$d.conf << EOF
+#<VirtualHost *:80>
+#    ServerAdmin admin@example.com
+#    ServerName $d
+#    ServerAlias *.$d
+#    DocumentRoot "/var/www/html/$w"
+#    DirectoryIndex index.html
+#    ErrorLog "/var/log/httpd/$w-error_log"
+#    CustomLog "/var/log/httpd/$w-access_log" combined
+#</VirtualHost>
+#EOF
+cat > /etc/httpd/conf.d/$d.conf << EOF
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    ServerName $d
+    RewriteEngine On
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}\$1 [R,L]
+</VirtualHost>
+EOF
+cat > /etc/httpd/conf.d/$d.ssl.conf << EOF
+<VirtualHost *:443>
+    ServerName $d
+    ServerAlias *.$d
+    DocumentRoot "/var/www/html/$w"
+    DirectoryIndex index.html
+    ErrorLog "/var/log/httpd/$w-error_log"
+    CustomLog "/var/log/httpd/$w-access_log" combined
+    SSLEngine on
+    SSLProtocol all -SSLv2 -SSLv3
+    SSLCertificateFile /etc/ssl/$d.crt
+    SSLCertificateKeyFile /etc/ssl/$d.key
+    SSLCertificateChainFile /etc/ssl/$d.ca-bundle
+</VirtualHost>
+EOF
+done
+#cat > /etc/httpd/conf.d/default.conf << EOF
+#<VirtualHost *:80>
+#    DocumentRoot /var/www/html
+#    ServerName 127.0.0.1
+#</VirtualHost>
+#EOF
+sed -i '/Listen 80/a\Listen 443' /etc/httpd/conf/httpd.conf
+sed -i '/Include conf.modules.d\/\*.conf/a\LoadModule ssl_module modules\/mod_ssl.so' /etc/httpd/conf/httpd.conf
+sed -i '/ServerName www.example.com:80/a\ServerName localhost:80' /etc/httpd/conf/httpd.conf
+mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak
+systemctl restart httpd
+getenforce
+firewall-cmd --list-ports
 
 # nginx
 # nginx代理php-fpm
@@ -403,12 +467,12 @@ gpgcheck=0
 enabled=1
 EOF
 yum install nginx unzip lrzsz -y
-systemctl enable nginx
 systemctl start nginx
 sed -i '/access_log/a\    server_names_hash_bucket_size 128;' /etc/nginx/nginx.conf
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --reload
+systemctl enable nginx
 domain=/root/domain
 l=$(cat /root/domain | wc -l)
 for ((i=1;i<=$l;i++))
