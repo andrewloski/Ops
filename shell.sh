@@ -349,6 +349,7 @@ cat > /etc/httpd/conf.d/$d.conf << EOF
 <VirtualHost *:80>
     ServerAdmin admin@example.com
     ServerName $d
+    ServerAlias $d www.$d
     RewriteEngine On
     RewriteCond %{SERVER_PORT} 80
     RewriteRule ^(.*)$ https://%{HTTP_HOST}\$1 [R,L]
